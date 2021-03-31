@@ -31,7 +31,7 @@ async def notify_state():
 async def notify_firmware_state():
     if USERS:  # asyncio.wait doesn't accept an empty list
         i=0
-        while (i < 100):
+        while (i <= 100):
             message = json.dumps({"action":"firmware","progress": i})
             await asyncio.wait([user.send(message) for user in USERS])
             i=i+1
@@ -42,7 +42,7 @@ async def notify_firmware_state():
 async def notify_web_state():
     if USERS:  # asyncio.wait doesn't accept an empty list
         i=0
-        while (i < 100):
+        while (i <= 100):
             message = json.dumps({"action":"web","progress": i})
             await asyncio.wait([user.send(message) for user in USERS])
             i=i+1
@@ -84,7 +84,7 @@ async def counter(websocket, path):
         await unregister(websocket)
 
 
-start_server = websockets.serve(counter, "127.0.0.1", 6789)
+start_server = websockets.serve(counter, "localhost", 6789)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
