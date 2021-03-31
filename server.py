@@ -36,7 +36,8 @@ async def notify_firmware_state():
             await asyncio.wait([user.send(message) for user in USERS])
             i=i+1
             time.sleep(1)
-
+            
+        await asyncio.wait([user.close() for user in USERS])
         
 
 async def notify_web_state():
@@ -47,7 +48,7 @@ async def notify_web_state():
             await asyncio.wait([user.send(message) for user in USERS])
             i=i+1
             time.sleep(1)
-
+        await asyncio.wait([user.close() for user in USERS])
 
 async def notify_users():
     if USERS:  # asyncio.wait doesn't accept an empty list
