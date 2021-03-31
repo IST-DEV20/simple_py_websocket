@@ -32,7 +32,7 @@ async def notify_firmware_state():
     if USERS:  # asyncio.wait doesn't accept an empty list
         i=0
         while (i <= 100):
-            message = json.dumps({"action":"firmware","progress": i})
+            message = json.dumps({"action":"firmware","progress": i,"message":"un zip ..."})
             await asyncio.wait([user.send(message) for user in USERS])
             i=i+1
             time.sleep(1)
@@ -43,7 +43,7 @@ async def notify_web_state():
     if USERS:  # asyncio.wait doesn't accept an empty list
         i=0
         while (i <= 100):
-            message = json.dumps({"action":"web","progress": i})
+            message = json.dumps({"action":"web","progress": i,"message":"update ...."})
             await asyncio.wait([user.send(message) for user in USERS])
             i=i+1
             time.sleep(1)
