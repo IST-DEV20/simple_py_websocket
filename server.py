@@ -36,7 +36,7 @@ async def notify_firmware_state():
             await asyncio.wait([user.send(message) for user in USERS])
             i=i+1
             time.sleep(1)
-            
+        print("Update firmware completed.")
         await asyncio.wait([user.close() for user in USERS])
         
 
@@ -48,6 +48,7 @@ async def notify_web_state():
             await asyncio.wait([user.send(message) for user in USERS])
             i=i+1
             time.sleep(1)
+        print("Update web GUI completed.")
         await asyncio.wait([user.close() for user in USERS])
 
 async def notify_users():
