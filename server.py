@@ -28,7 +28,7 @@ async def notify_state():
         message = state_event()
         await asyncio.wait([user.send(message) for user in USERS])
 
-async def notify_firmware_state():
+async def notify_firmware_state(filename):
     if USERS:  # asyncio.wait doesn't accept an empty list
         i=0
         while (i <= 100):
@@ -40,7 +40,7 @@ async def notify_firmware_state():
         await asyncio.wait([user.close() for user in USERS])
         
 
-async def notify_web_state():
+async def notify_web_state(filename):
     if USERS:  # asyncio.wait doesn't accept an empty list
         i=0
         while (i <= 100):
@@ -76,10 +76,10 @@ async def counter(websocket, path):
             data = json.loads(message)
             if data["action"] == "firmware":
                 print("update firmware..")
-                await notify_firmware_state()
+                await notify_firmware_state(data["filename"])
             elif data["action"] == "web":
                 print("update web server..")
-                await notify_web_state()
+                await notify_web_state(data["filename"])
             else:
                 logging.error("unsupported event: {}", data)
     finally:
