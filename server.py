@@ -75,11 +75,11 @@ async def counter(websocket, path):
         async for message in websocket:
             data = json.loads(message)
             if data["action"] == "firmware":
-                print("update firmware..")
+                print("update firmware..:" + data["filename"])
                 await notify_firmware_state(data["filename"])
             elif data["action"] == "web":
                 print("update web server..")
-                await notify_web_state(data["filename"])
+                await notify_web_state(data["filename"] + data["filename"])
             else:
                 logging.error("unsupported event: {}", data)
     finally:
